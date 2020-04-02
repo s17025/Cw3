@@ -77,7 +77,7 @@ namespace Cw3.Controllers
         //    return NotFound("Nie znaleziono studenta!");
         //}
         //========================================================================================================================
-        
+        /*
         [HttpGet]
         public IActionResult GetStudents()
         {
@@ -121,7 +121,7 @@ namespace Cw3.Controllers
             return Ok(list);
 
         }
-
+        */
 
     }
 }

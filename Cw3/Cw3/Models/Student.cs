@@ -11,10 +11,10 @@ namespace Cw3.Models
         public string IndexNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime DataUrodzenia { get; set; }
+        public DateTime BirthDate { get; set; }
         public string NameStudies { get; set; }
-        public int NumSem { get; set; }
-            
+
+      
 
         public Student()
         {
