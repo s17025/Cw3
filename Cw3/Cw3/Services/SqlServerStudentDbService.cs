@@ -98,6 +98,52 @@ namespace Cw3.Services
            
         }
 
+        public Student GetStudent(string index)
+        {
+            var conBuilder = new SqlConnectionStringBuilder();
+            conBuilder.DataSource = "db-mssql";
+            conBuilder.InitialCatalog = "s17025";
+            conBuilder.IntegratedSecurity = true;
+            string ConString = conBuilder.ConnectionString;
+            using (var con = new SqlConnection(ConString))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                con.Open();
+                var tran = con.BeginTransaction();
+                com.Transaction = tran;
+                try
+                {
+                    com.CommandText = "SELECT * FROM STUDENT WHERE INDEXNUMBER = @index";
+                    com.Parameters.AddWithValue("index", index);
+                    var dr = com.ExecuteReader();
+
+                    if (!dr.Read())
+                    {
+                        tran.Rollback();
+                    }
+
+                    var student = new Student
+                    {
+                        IndexNumber = Convert.ToString(dr["IndexNumber"]),
+                        FirstName = Convert.ToString(dr["FirstName"]),
+                        LastName = Convert.ToString(dr["LastName"]),
+                        BirthDate = DateTime.Parse(Convert.ToString(dr["BirthDate"])),
+                        NameStudies = Convert.ToString(dr["IdEnrollment"])
+                    };
+                    dr.Close();
+                    tran.Commit();
+                    return student;
+
+                }catch(SqlException e)
+                {
+                    return null;
+                }
+            }
+
+                
+        }
+
         public string PromoteStudents(PropomoteStudentsRequest request)
         {
             var conBuilder = new SqlConnectionStringBuilder();

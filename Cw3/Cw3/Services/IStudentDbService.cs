@@ -1,5 +1,6 @@
 ﻿using Cw3.DIOs.Requests;
 using Cw3.DTOs.Requests;
+using Cw3.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,8 @@ namespace Cw3.Services
     {
         public string EnrollStudent(EnrollStudentRequest request);
         public string PromoteStudents(PropomoteStudentsRequest request);
+        public Student GetStudent(string index);
+
+
     }
 }
